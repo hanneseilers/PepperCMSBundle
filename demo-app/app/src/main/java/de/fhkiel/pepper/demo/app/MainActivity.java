@@ -10,8 +10,6 @@ import com.aldebaran.qi.sdk.QiContext;
 import com.aldebaran.qi.sdk.QiSDK;
 import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
 
-import de.fhkiel.pepper.testapp.R;
-
 public class MainActivity extends AppCompatActivity implements RobotLifecycleCallbacks {
 
     @Override
