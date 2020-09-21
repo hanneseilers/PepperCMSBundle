@@ -2,15 +2,25 @@ package de.fhkiel.pepper.demo.app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.aldebaran.qi.sdk.QiContext;
 import com.aldebaran.qi.sdk.QiSDK;
 import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MainActivity extends AppCompatActivity implements RobotLifecycleCallbacks {
+
+    private static final String TAG = MainActivity.class.getName();
+
+    private JSONObject app;
+    private JSONObject data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +41,27 @@ public class MainActivity extends AppCompatActivity implements RobotLifecycleCal
         if(intent != null && intent.hasExtra("app")){
             String app = intent.getStringExtra("app");
             ((TextView) findViewById(R.id.txtIntentApp)).setText(app);
+
+            try {
+                this.app = new JSONObject(app);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
         } else {
             ((TextView) findViewById(R.id.txtIntentApp)).setText("no intent data 'app'");
         }
 
         if(intent != null && intent.hasExtra("data")){
-            String app = intent.getStringExtra("data");
-            ((TextView) findViewById(R.id.txtIntentData)).setText(app);
+            String data = intent.getStringExtra("data");
+            ((TextView) findViewById(R.id.txtIntentData)).setText(data);
+
+            try {
+                this.data = new JSONObject(data);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
         } else {
             ((TextView) findViewById(R.id.txtIntentData)).setText("no intent data 'data'");
         }
@@ -49,6 +73,17 @@ public class MainActivity extends AppCompatActivity implements RobotLifecycleCal
 
     @Override
     protected void onDestroy() {
+        Intent returnIntent = new Intent();
+        if( this.app != null ) {
+            Log.d(TAG, "set results app: " + this.data);
+            returnIntent.putExtra("app", this.app.toString());
+        }
+        if( this.data != null ) {
+            Log.d(TAG, "set result data: " + this.data);
+            returnIntent.putExtra("data", this.data.toString());
+        }
+        Log.d(TAG, "set result intent");
+        this.setResult(Activity.RESULT_OK, returnIntent);
         QiSDK.unregister(this, this);
         super.onDestroy();
     }
