@@ -15,6 +15,8 @@ import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity implements RobotLifecycleCallbacks {
 
     private static final String TAG = MainActivity.class.getName();
@@ -37,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements RobotLifecycleCal
         } else {
             ((TextView) findViewById(R.id.txtIntentUser)).setText("no intent data 'user'");
         }
+
+
 
         if(intent != null && intent.hasExtra("app")){
             String app = intent.getStringExtra("app");
@@ -66,13 +70,27 @@ public class MainActivity extends AppCompatActivity implements RobotLifecycleCal
             ((TextView) findViewById(R.id.txtIntentData)).setText("no intent data 'data'");
         }
 
-        findViewById(R.id.btnClose).setOnClickListener(view -> {
+        findViewById(R.id.btnClose).setOnClickListener(v -> {
             this.finish();
         });
+
+        findViewById(R.id.btnData).setOnClickListener(v -> {
+            if(this.data == null){
+                this.data = new JSONObject();
+            }
+
+            try {
+                this.data.put("time", (new Date()).getTime());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            this.returnToCMS();
+        });
+
     }
 
-    @Override
-    protected void onDestroy() {
+    private void returnToCMS(){
         Intent returnIntent = new Intent();
         if( this.app != null ) {
             Log.d(TAG, "set results app: " + this.data);
@@ -84,6 +102,10 @@ public class MainActivity extends AppCompatActivity implements RobotLifecycleCal
         }
         Log.d(TAG, "set result intent");
         this.setResult(Activity.RESULT_OK, returnIntent);
+    }
+
+    @Override
+    protected void onDestroy() {
         QiSDK.unregister(this, this);
         super.onDestroy();
     }

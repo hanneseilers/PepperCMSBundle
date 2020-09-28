@@ -28,10 +28,19 @@
         android:id="@+id/txtIntentData"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/btnClose"
+        app:layout_constraintBottom_toTopOf="@+id/btnData"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtIntentApp" />
+
+    <Button
+        android:id="@+id/btnData"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="set data"
+        app:layout_constraintBottom_toTopOf="@+id/btnClose"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnClose"
