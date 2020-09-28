@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements RobotLifecycleCal
 
     private JSONObject app;
     private JSONObject data;
+    private JSONObject user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,12 @@ public class MainActivity extends AppCompatActivity implements RobotLifecycleCal
         if(intent != null && intent.hasExtra("user")){
             String user = intent.getStringExtra("user");
             ((TextView) findViewById(R.id.txtIntentUser)).setText(user);
+
+            try{
+                this.user = new JSONObject(user);
+            } catch (JSONException e){
+                e.printStackTrace();
+            }
         } else {
             ((TextView) findViewById(R.id.txtIntentUser)).setText("no intent data 'user'");
         }
@@ -99,6 +106,10 @@ public class MainActivity extends AppCompatActivity implements RobotLifecycleCal
         if( this.data != null ) {
             Log.d(TAG, "set result data: " + this.data);
             returnIntent.putExtra("data", this.data.toString());
+        }
+        if( this.user != null ){
+            Log.d(TAG, "set result user: " + this.user);
+            returnIntent.putExtra("user", this.user.toString());
         }
         Log.d(TAG, "set result intent");
         this.setResult(Activity.RESULT_OK, returnIntent);
