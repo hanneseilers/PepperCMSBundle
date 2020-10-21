@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements RobotLifecycleCal
         // get intent
         Intent intent = getIntent();
 
+        Log.w(TAG, "user: " + intent.getStringExtra("user"));
+
         if(intent != null && intent.hasExtra("user")){
             String user = intent.getStringExtra("user");
             ((TextView) findViewById(R.id.txtIntentUser)).setText(user);
