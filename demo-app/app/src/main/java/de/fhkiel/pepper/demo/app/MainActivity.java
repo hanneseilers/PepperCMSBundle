@@ -63,8 +63,10 @@ public class MainActivity extends AppCompatActivity implements RobotLifecycleCal
             ((TextView) findViewById(R.id.txtIntentApp)).setText("no intent data 'app'");
         }
 
+        Log.i(TAG, "data " + (intent.hasExtra("data")) );
         if(intent != null && intent.hasExtra("data")){
             String data = intent.getStringExtra("data");
+            Log.i(TAG, "data:\n" + data);
             ((TextView) findViewById(R.id.txtIntentData)).setText(data);
 
             try {
