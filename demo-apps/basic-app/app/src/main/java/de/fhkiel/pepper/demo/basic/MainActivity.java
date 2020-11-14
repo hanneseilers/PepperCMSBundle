@@ -1,4 +1,4 @@
-package de.fhkiel.pepper.demo.app;
+package de.fhkiel.pepper.demo.basic;
 
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -5,7 +5,7 @@ android {
     buildToolsVersion '30.0.2'
 
     defaultConfig {
-        applicationId 'de.fhkiel.pepper.demo.app'
+        applicationId 'de.fhkiel.pepper.demo.basic'
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
