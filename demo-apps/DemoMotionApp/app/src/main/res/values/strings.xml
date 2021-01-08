@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Demo Motion App</string>
     <string name="btnClose">Close App</string>
-    <string name="btnScan">Wave Hello</string>
+    <string name="btnScan">Scan Environment</string>
     <string name="btnDance">Dance</string>
     <string name="btnMove">Move</string>
 </resources>
