@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Demo Basic App</string>
+    <string name="txtApp">App:</string>
+    <string name="txtUser">User:</string>
+    <string name="txtData">Data:</string>
+    <string name="nodata">- no data -</string>
+    <string name="btnClose">Close App</string>
 </resources>
