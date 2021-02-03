@@ -1,0 +1,10 @@
+{
+	"type": "simple",
+	"title": "Simple Demo Repository",
+	"Description": "Simple repository for demonstration Issues.",
+	"lastUpdate": 1605175295,
+	"apps": [
+		"app1/",
+		"app2/"
+	]
+}
