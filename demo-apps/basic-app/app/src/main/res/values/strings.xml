@@ -1,5 +1,0 @@
-<resources>
-    <string name="app_name">Pepper Demo Basic CMS App</string>
-    <string name="btnSetData">Set Timestamp Data</string>
-    <string name="btnClose">Close App</string>
-</resources>
