@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="de.fhkiel.pepper.cms.demobasicapp">
+    package="de.fhkiel.pepper.cms.demo.basic">
 
     <application
         android:allowBackup="true"
@@ -18,6 +18,8 @@
         </activity>
     </application>
 
-    <uses-feature android:name="com.aldebaran.qi" />
+    <uses-feature android:name="com.softbank.hardware.pepper"/>
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 </manifest>
