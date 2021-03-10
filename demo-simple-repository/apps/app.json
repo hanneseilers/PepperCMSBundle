@@ -11,7 +11,9 @@
 	},
 	{
 		"name": "Demo Motion",
-		"description": "Demonstraip app for basic motion types the robot can do.",
+		"description": "Demonstration app for basic motion types the robot can do.",
+		"intentPackage": "",
+		"intentClass": "",
 		"latestVersion": 1,
 		"downloadURL": "demoapp2.apk",
 		"categoriesString": "Demo",
