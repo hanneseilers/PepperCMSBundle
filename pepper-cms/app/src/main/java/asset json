@@ -1,0 +1,36 @@
+[
+  {
+    "url": "https://api.github.com/repos/hanneseilers/key-genrator/releases/assets/24897504",
+    "id": 24897504,
+    "node_id": "MDEyOlJlbGVhc2VBc3NldDI0ODk3NTA0",
+    "name": "Auslagen.pdf",
+    "label": null,
+    "uploader": {
+      "login": "hanneseilers",
+      "id": 3993793,
+      "node_id": "MDQ6VXNlcjM5OTM3OTM=",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/3993793?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/hanneseilers",
+      "html_url": "https://github.com/hanneseilers",
+      "followers_url": "https://api.github.com/users/hanneseilers/followers",
+      "following_url": "https://api.github.com/users/hanneseilers/following{/other_user}",
+      "gists_url": "https://api.github.com/users/hanneseilers/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/hanneseilers/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/hanneseilers/subscriptions",
+      "organizations_url": "https://api.github.com/users/hanneseilers/orgs",
+      "repos_url": "https://api.github.com/users/hanneseilers/repos",
+      "events_url": "https://api.github.com/users/hanneseilers/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/hanneseilers/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "content_type": "application/pdf",
+    "state": "uploaded",
+    "size": 72173,
+    "download_count": 0,
+    "created_at": "2020-09-04T12:10:39Z",
+    "updated_at": "2020-09-04T12:10:40Z",
+    "browser_download_url": "https://github.com/hanneseilers/key-genrator/releases/download/test/Auslagen.pdf"
+  }
+]

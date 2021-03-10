@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Pepper CMS</string>
+    <string name="apps_available">Available Apps:</string>
+    <string name="user_use_sample">Use default user</string>
+
+    <string name="toastLoadingApps">Loading apps</string>
+    <string name="toastAppsLoaded">Apps loaded</string>
+    <string name="toastNoApps">No Apps found!</string>
+</resources>
