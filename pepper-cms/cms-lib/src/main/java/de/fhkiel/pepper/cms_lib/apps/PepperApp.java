@@ -185,13 +185,14 @@ public class PepperApp implements JSONObjectable {
                     && jsonObject.has(TAG_INTENT_PACKAGE)
                     && jsonObject.has(TAG_INTENT_CLASS)
                     && jsonObject.has(TAG_LATEST_VERSION)) {
+
+                Log.d(TAG, "\t> processing basic information");
                 PepperApp app = new PepperApp(jsonObject.getString(TAG_NAME));
                 app.setIntentPackage(jsonObject.getString(TAG_INTENT_PACKAGE));
                 app.setIntentClass(jsonObject.getString(TAG_INTENT_CLASS));
                 app.setLatestVersion(jsonObject.getInt(TAG_LATEST_VERSION));
 
-                Log.d(TAG, "\t> processing details");
-
+                Log.d(TAG, "\t> processing additional informations");
                 if( jsonObject.has(TAG_TAGS) ) app.setTags(jsonObject.getString(TAG_TAGS));
                 if( jsonObject.has(TAG_CATEGORIES_STRING) ) app.setCategoriesString(jsonObject.getString(TAG_CATEGORIES_STRING));
                 if( jsonObject.has(TAG_DOWNLOAD_URL) ) app.setDownloadURL(jsonObject.getString(TAG_DOWNLOAD_URL));

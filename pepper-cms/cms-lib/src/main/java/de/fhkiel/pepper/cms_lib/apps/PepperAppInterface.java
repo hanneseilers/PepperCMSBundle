@@ -12,7 +12,7 @@ public interface PepperAppInterface {
      *
      * @param apps List of loaded available {@link PepperApp}s
      */
-    void onPepperAppsLoaded(HashMap<Integer, PepperApp> apps, boolean isRemote);
+    void onPepperAppsLoaded(HashMap<String, PepperApp> apps, boolean isRemote);
 
     /**
      * Called, if app will be started

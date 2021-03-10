@@ -30,7 +30,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     private static final String TAG = MainActivity.class.getName();
 
     private PepperCMSControllerInterface pepperCMS;
-    private HashMap<Integer, PepperApp> pepperApps = new HashMap<>();
+    private HashMap<String, PepperApp> pepperApps = new HashMap<>();
 
     private boolean tryRepository = false;
 
@@ -46,7 +46,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         // Creating cms app controller
         pepperCMS = new PepperCMSController(this);
         pepperCMS.addPepperAppInterfaceListener(this);
-        Log.d(TAG, "app controller created");
+        Log.d(TAG, "cms controller created");
 
         // ---- UI LOGIC BEGIN ----
 
@@ -56,7 +56,6 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         // ---- UI LOGIC END ----
 
         // after loading ui, get available apps
-        Log.i(TAG, "loading apps");
         new Thread(() -> {
             toast( getString(R.string.toastLoadingApps) );
             pepperCMS.startCMS(true );
@@ -69,7 +68,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         if(this.pepperCMS != null){
             this.pepperCMS.onActivityResult(requestCode, resultCode, data);
         } else {
-            Log.e(TAG, "cannot give activity result to app controler. null found!");
+            Log.e(TAG, "cannot give activity result to app controller. null found!");
         }
     }
 
@@ -79,7 +78,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         super.onDestroy();
     }
 
-    private void showAppsUi(HashMap<Integer, PepperApp> apps){
+    private void showAppsUi(HashMap<String, PepperApp> apps){
         runOnUiThread(() -> {
 
             // TODO: handle loadig apps into ui
@@ -87,7 +86,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
             // simple example
             GridLayout layout = findViewById(R.id.gridApps);
             layout.removeAllViewsInLayout();
-            for(int i : apps.keySet()){
+            for(String i : apps.keySet()){
                 PepperApp app = apps.get(i);
                 Button button = new Button(this);
                 button.setText(app.getName());
@@ -115,7 +114,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
      * @param apps List of loaded available {@link PepperApp}s
      */
     @Override
-    public void onPepperAppsLoaded(HashMap<Integer, PepperApp> apps, boolean isRemote) {
+    public void onPepperAppsLoaded(HashMap<String, PepperApp> apps, boolean isRemote) {
         Log.i(TAG, "Apps loaded: " + apps.size());
         this.pepperApps = apps;
 

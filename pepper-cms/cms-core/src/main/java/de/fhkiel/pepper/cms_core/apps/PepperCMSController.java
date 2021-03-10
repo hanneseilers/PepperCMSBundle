@@ -28,7 +28,6 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import de.fhkiel.pepper.cms_lib.repository.PepperCMSRemote;
 import de.fhkiel.pepper.cms_lib.repository.interfaces.PepperCMSRepositoryLoadedCallable;
 import de.fhkiel.pepper.cms_lib.repository.PepperCMSRepository;
 import de.fhkiel.pepper.cms_lib.apps.PepperApp;
@@ -46,11 +45,13 @@ public class PepperCMSController implements PepperCMSControllerInterface {
     private static final String localRepositoriesFile = "repositories.config";
 
     private final Activity activity;
+    private AppController appController = null;
+
     private static boolean useOnlineSaved = false;
     private String storagePath = "games/db/";
-    private HashMap<Integer, PepperApp> apps = new HashMap<>();
-    private HashMap<Integer, PepperApp> updatableApps = new HashMap<>();
-    private HashMap<Integer, PepperApp> installableApps = new HashMap<>();
+    private HashMap<String, PepperApp> apps = new HashMap<>();
+    private HashMap<String, PepperApp> updatableApps = new HashMap<>();
+    private HashMap<String, PepperApp> installableApps = new HashMap<>();
 
     private FileDescriptor appDataFile = null;
     private HashMap<String, Intent>  pendingIntentResults = new HashMap<>();
@@ -60,15 +61,15 @@ public class PepperCMSController implements PepperCMSControllerInterface {
 
     public PepperCMSController(Activity activity) { this.activity = activity; }
 
-    public HashMap<Integer, PepperApp> getApps() {
+    public HashMap<String, PepperApp> getApps() {
         return apps;
     }
 
-    public HashMap<Integer, PepperApp> getUpdatableApps() {
+    public HashMap<String, PepperApp> getUpdatableApps() {
         return updatableApps;
     }
 
-    public HashMap<Integer, PepperApp> getInstallableApps() {
+    public HashMap<String, PepperApp> getInstallableApps() {
         return installableApps;
     }
 
@@ -79,6 +80,11 @@ public class PepperCMSController implements PepperCMSControllerInterface {
             Log.e(TAG, "Start cms only aside from UI tread!");
             return false;
         }
+
+        Log.d(TAG, "Pepper CMS starting ...");
+
+        // starting app controller
+        appController = new AppController( activity.getApplicationContext() );
 
         // TODO: remove after testing
         if(!isRestart) {
@@ -178,9 +184,16 @@ public class PepperCMSController implements PepperCMSControllerInterface {
                     try {
 
                         ArrayList<PepperApp> repositoryApps = repository.getPepperApps();
-                        Log.d(TAG, "found " + +repositoryApps.size() + " apps.");
+                        if(repositoryApps != null) {
+                            Log.d(TAG, "found " + repositoryApps.size() + " apps");
+                            for(PepperApp app : repositoryApps){
+                                addPepperApp(app);
+                            }
+                        }
 
-                        // TODO: Checking with loaded apps
+                        // notify listener
+                        notifyOnAppsLoadedListener(this.installableApps, true);
+                        notifyOnAppsUpdatetableListener(this.updatableApps);
 
                     } catch (MalformedURLException e){
                         Log.e(TAG, "Malformed repository url: " + e);
@@ -235,12 +248,34 @@ public class PepperCMSController implements PepperCMSControllerInterface {
             //processPendingIntentResults();
 
             // notify listener
-            for (PepperAppInterface listener : PepperCMSControllerInterface.pepperAppInterfaceListener) {
-                Log.d(TAG, "\t> calling callbacks");
-                listener.onPepperAppsLoaded(this.apps, false);
-            }
+            notifyOnAppsLoadedListener(this.apps, true);
 
         }).start();
+    }
+
+    /**
+     * Notifies listeners thast apps are loaded.
+     * @param apps          {@link HashMap} of {@link PepperApp}s
+     * @param isRemote      {@code true} if list are remote apps, {@code false} otherwise.
+     */
+    private void notifyOnAppsLoadedListener(HashMap<String, PepperApp> apps, boolean isRemote){
+        for (PepperAppInterface listener : PepperCMSControllerInterface.pepperAppInterfaceListener) {
+            Log.d(TAG, "\t> calling callbacks");
+            listener.onPepperAppsLoaded(apps, isRemote);
+        }
+    }
+
+    /**
+     * Notifies listeners about apps with available update.
+     * @param apps      {@link HashMap} of updateable {@link PepperApp}s
+     */
+    private void notifyOnAppsUpdatetableListener(HashMap<String, PepperApp> apps){
+        for (PepperAppInterface listener : PepperCMSControllerInterface.pepperAppInterfaceListener) {
+            Log.d(TAG, "\t> calling callbacks");
+            for(PepperApp app : apps.values()){
+                listener.onAppUpdateAvailable(app);
+            }
+        }
     }
 
     /**
@@ -272,19 +307,26 @@ public class PepperCMSController implements PepperCMSControllerInterface {
      * @param app   {@link PepperApp} to add
      */
     private void addPepperApp(PepperApp app){
-        int hash = app.getIdentifier().hashCode();
+        String hash = app.getIdentifier();
+        Log.d(TAG, "adding app: " + hash);
 
-        if( this.apps.containsKey(hash) ){
+        if( this.apps.containsKey(hash) ) {
             // check for newer version
+            Log.d(TAG, "\t> checking for update ...");
             PepperApp localApp = this.apps.get(hash);
-            if( localApp.getCurrentVersion() < app.getLatestVersion() ){
-                app.setCurrentVersion( localApp.getCurrentVersion() );
+            if (localApp.getCurrentVersion() < app.getLatestVersion()) {
+                // add app to updateable list
+                app.setCurrentVersion(localApp.getCurrentVersion());
                 this.updatableApps.put(hash, app);
+                Log.w(TAG, "\t\t> Update for app " + hash + " available");
+            } else {
+                Log.d(TAG,"\t\t> app up to date");
             }
+        } else {
+            // add app to instalable list
+            Log.d(TAG, "\t> app not installed");
+            this.installableApps.put(hash, app);
         }
-
-        // add app to list
-        this.installableApps.put(hash, app);
     }
 
     /**
@@ -295,7 +337,7 @@ public class PepperCMSController implements PepperCMSControllerInterface {
         // create json array of loaded apps
         Log.d(TAG, "\t > Saving pepper apps.");
         JSONArray jsonArray = new JSONArray();
-        for( int hash : this.apps.keySet() ){
+        for( String hash : this.apps.keySet() ){
             PepperApp app = this.apps.get(hash);
             JSONObject jsonObject = app.toJSONObject();
             jsonArray.put(jsonObject);
@@ -341,7 +383,7 @@ public class PepperCMSController implements PepperCMSControllerInterface {
      * @return {@link HashMap} of {@link PepperApp}s.
      */
     @Override
-    public HashMap<Integer, PepperApp> getUpdateablePepperApps() {
+    public HashMap<String, PepperApp> getUpdateablePepperApps() {
         return this.updatableApps;
     }
 

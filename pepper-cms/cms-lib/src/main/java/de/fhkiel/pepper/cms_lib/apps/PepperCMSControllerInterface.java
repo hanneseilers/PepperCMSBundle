@@ -76,7 +76,7 @@ public interface PepperCMSControllerInterface {
      * Gets list of {@link PepperApp}s, ready for update.
      * @return  {@link HashMap} of {@link PepperApp}s.
      */
-    HashMap<Integer, PepperApp> getUpdateablePepperApps();
+    HashMap<String, PepperApp> getUpdateablePepperApps();
 
     default void addPepperAppInterfaceListener(PepperAppInterface listener){
         if(!pepperAppInterfaceListener.contains(listener)){

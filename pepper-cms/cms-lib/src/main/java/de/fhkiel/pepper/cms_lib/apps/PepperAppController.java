@@ -31,12 +31,6 @@ public interface PepperAppController {
         return startPepperApp(app, null);
     }
 
-    /**
-     * Function to load available {@link PepperApp}
-     * Notifies all listeners, if apps loaded.
-     */
-    void loadPepperApps();
-
     default void addPepperAppInterfaceListener(PepperAppInterface listener){
         if(!pepperAppInterfaceListener.contains(listener)){
             pepperAppInterfaceListener.add(listener);

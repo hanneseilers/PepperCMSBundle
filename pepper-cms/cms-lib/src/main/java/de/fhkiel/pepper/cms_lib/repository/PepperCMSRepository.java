@@ -272,21 +272,25 @@ public class PepperCMSRepository implements JSONObjectable {
 
                                 URL directoryURL = new URL(getRepositoryURL(), directory + "app.json");
                                 JSONArray appArray = PepperCMSRemote.getArray(directoryURL);
+                                Log.d(TAG, "found array size = " + appArray.length());
 
                                 // crawling apps
                                 this.apps.clear();
-                                for( int y=0; y<appArray.length(); y++ ){
-                                    JSONObject jsonAppData = appArray.getJSONObject(y);
+                                for( int n=0; n<appArray.length(); n++ ){
+                                    JSONObject jsonAppData = appArray.getJSONObject(n);
                                     PepperApp app = PepperApp.fromJson(jsonAppData);
 
                                     if(app != null){
+                                        Log.w(TAG, "\t> added");
                                         this.apps.add(app);
                                     } else{
-                                        Log.e(TAG, "Cannot parse data to app object!");
+                                        Log.e(TAG, "Cannot parse apps json data!");
                                     }
                                 }
 
                             }
+
+                            return this.apps;
                         }
 
                     } catch (JSONException e){
