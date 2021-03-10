@@ -1,4 +1,0 @@
-include ':cms-core'
-include ':cms-lib'
-include ':app'
-rootProject.name = "Pepper CMS"
