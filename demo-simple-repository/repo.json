@@ -1,7 +1,7 @@
 {
 	"type": "simple",
 	"title": "Simple Demo Repository",
-	"Description": "Simple repository for demonstration Issues.",
+	"description": "Simple repository for demonstration Issues.",
 	"lastUpdate": 1605175295,
 	"apps": [
 		"apps/",
