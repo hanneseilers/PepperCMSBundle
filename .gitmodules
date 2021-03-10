@@ -1,0 +1,3 @@
+[submodule "pepper-cms"]
+	path = pepper-cms
+	url = https://github.com/hanneseilers/Pepper-cms.git
