@@ -22,6 +22,7 @@
         android:id="@+id/btnAnimation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="@string/btnAnimationDance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -32,6 +33,7 @@
         android:id="@+id/btnAnimationLabels"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="@string/btnAnimationLabels"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,9 +43,19 @@
         android:id="@+id/btnTrajectory"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="@string/btnTrajectory"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAnimationLabels" />
+        app:layout_constraintTop_toBottomOf="@+id/txtLabels" />
+
+    <TextView
+        android:id="@+id/txtLabels"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAnimationLabels"
+        tools:text="@string/txtLabels" />
 </androidx.constraintlayout.widget.ConstraintLayout>

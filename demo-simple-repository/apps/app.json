@@ -15,7 +15,7 @@
 		"intentPackage": "de.fhkiel.pepper.cms.demo.motion",
 		"intentClass": "MainActivity",
 		"latestVersion": 1,
-		"downloadURL": "demoapp2.apk",
+		"downloadURL": "de.fhkiel.pepper.cms.demo.motion.apk",
 		"categoriesString": "Demo",
 		"tags": "demo app motion"
 	}
