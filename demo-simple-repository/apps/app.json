@@ -2,8 +2,8 @@
 	{
 		"name": "Demo Basic",
 		"description": "Demonstration app for basic Intent handling",
-		"intentPackage": "",
-		"intentClass": "",
+		"intentPackage": "de.fhkiel.pepper.cms.demo.basic",
+		"intentClass": "MainActivity",
 		"latestVersion": 1,
 		"downloadURL": "de.fhkiel.pepper.cms.demo.basic.apk",
 		"categoriesString": "Demo.Basic",
@@ -12,8 +12,8 @@
 	{
 		"name": "Demo Motion",
 		"description": "Demonstration app for basic motion types the robot can do.",
-		"intentPackage": "",
-		"intentClass": "",
+		"intentPackage": "de.fhkiel.pepper.cms.demo.motion",
+		"intentClass": "MainActivity",
 		"latestVersion": 1,
 		"downloadURL": "demoapp2.apk",
 		"categoriesString": "Demo",
