@@ -43,4 +43,5 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'com.aldebaran:qisdk:1.7.5'
 	implementation 'com.aldebaran:qisdk-design:1.7.5'
+    implementation project(path: ':PepperLib')
 }
