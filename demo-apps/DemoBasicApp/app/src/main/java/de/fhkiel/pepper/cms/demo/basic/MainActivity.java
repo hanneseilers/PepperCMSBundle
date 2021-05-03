@@ -22,16 +22,20 @@ import java.util.Date;
 
 public class MainActivity extends RobotActivity implements RobotLifecycleCallbacks {
 
+    // Tag for logging
     private static final String TAG = MainActivity.class.getName();
 
+    // Intent keys cotaining data from CMS
     private static final String INTENT_KEY_APP = "app";
     private static final String INTENT_KEY_DATA = "data";
     private static final String INTENT_KEY_USER = "user";
 
+    // Object to store intent data
     private JSONObject app;
     private JSONObject data;
     private JSONObject user;
 
+    // Robot context
     private QiContext qiContext;
 
     @Override
@@ -40,8 +44,9 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         setContentView(R.layout.activity_main);
 
         // hide big speech bar
-        setSpeechBarDisplayStrategy( SpeechBarDisplayStrategy.IMMERSIVE );
+        //setSpeechBarDisplayStrategy( SpeechBarDisplayStrategy.IMMERSIVE );
 
+        // Register Robot SDK
         QiSDK.register(this, this);
 
         // Handling intent data
@@ -50,9 +55,11 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         Log.w( TAG, "user: " + intent.getStringExtra(INTENT_KEY_USER) );
         Log.w( TAG, "data: " + intent.getStringExtra(INTENT_KEY_DATA) );
 
-        if( intent.hasExtra(INTENT_KEY_APP) ){
-            ((TextView) findViewById(R.id.txtIntentApp)).setText( intent.getStringExtra(INTENT_KEY_APP) );
+        // Get Intent data from CMS, if available and store them in JSONObjects
 
+        // App Data: Information about this app
+        // Data structure defined by CMS
+        if( intent.hasExtra(INTENT_KEY_APP) ){
             try {
                 this.app = new JSONObject( intent.getStringExtra(INTENT_KEY_APP) );
             } catch (JSONException e){
@@ -60,9 +67,9 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
             }
         }
 
+        // User Data: Data about the user loged in to the CMS
+        // Data structure defined by CMS
         if( intent.hasExtra(INTENT_KEY_USER) ){
-            ((TextView) findViewById(R.id.txtIntentUser)).setText( intent.getStringExtra(INTENT_KEY_USER) );
-
             try {
                 this.user = new JSONObject( intent.getStringExtra(INTENT_KEY_USER) );
             } catch (JSONException e){
@@ -70,9 +77,9 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
             }
         }
 
+        // Data: Data stored by this app inside CMS for the logged in user.
+        // Only has to be valid JSON, structure defined by this App
         if( intent.hasExtra(INTENT_KEY_DATA) ){
-            ((TextView) findViewById(R.id.txtIntentData)).setText( intent.getStringExtra(INTENT_KEY_DATA) );
-
             try {
                 this.data = new JSONObject( intent.getStringExtra(INTENT_KEY_DATA) );
             } catch (JSONException e){
@@ -86,12 +93,17 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
                 this.data = new JSONObject();
             }
 
+            // Demo setting intent result to return to CMS
+            // Data is tored in CMS with the user currently logged in and passed back
+            // as Intent data for this user on next App start
+            /*
             try {
                 this.data.put("timestamp", (new Date()).getTime());
                 Log.d( TAG, "set timestamp as result");
             } catch (JSONException e){
                 Log.w( TAG, e);
             }
+            */
 
             closeApp();
         });
@@ -120,31 +132,6 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         this.finishAndRemoveTask();
     }
 
-    /**
-     * Say something
-     * @param rescource Rescource id of the text to say
-     */
-    private void say(int rescource){
-        if( this.qiContext != null ){
-            new Thread(() -> {
-
-                // Synchronize to wait, if robot is already talking
-                synchronized (this) {
-                    Log.i(TAG, "---- say: " + getString(rescource));
-                    Phrase phrase = new Phrase(getString(rescource));
-                    Say say = SayBuilder
-                            .with(this.qiContext)
-                            .withPhrase(phrase)
-                            .build();
-                    say.run();
-                }
-
-            }).start();
-        } else {
-            Log.e(TAG, "---- no context");
-        }
-    }
-
     @Override
     protected void onDestroy() {
         QiSDK.unregister(this, this);
@@ -154,17 +141,18 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     @Override
     public void onRobotFocusGained(QiContext qiContext) {
         this.qiContext = qiContext;
-        say(R.string.sayFocusGained);
-        say(R.string.sayFocusGained);
+        Log.d(TAG, "Robot focus gained.");
     }
 
     @Override
     public void onRobotFocusLost() {
         this.qiContext = null;
+        Log.w(TAG, "Robot focus lost.");
     }
 
     @Override
     public void onRobotFocusRefused(String reason) {
         this.qiContext = null;
+        Log.e(TAG, "Robot focus refused!");
     }
 }
