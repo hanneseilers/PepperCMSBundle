@@ -18,10 +18,10 @@ import java.util.Date;
 
 import de.fhkiel.pepper.lib.PepperLib;
 
-public class MainActivity extends RobotActivity implements RobotLifecycleCallbacks, PepperLib.PepperLibCMSCallbackListener {
+public class BasicActivity extends RobotActivity implements RobotLifecycleCallbacks, PepperLib.PepperLibCMSCallbackListener {
 
     // Tag for logging
-    private static final String TAG = MainActivity.class.getName();
+    private static final String TAG = BasicActivity.class.getName();
 
     // Reference to Pepper Library
     public PepperLib pepperLib;
