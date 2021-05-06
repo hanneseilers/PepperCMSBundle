@@ -1,3 +1,4 @@
 rootProject.name = "DemoBasicApp"
-include ':app'
+include ':basic'
 include ':PepperLib'
+include ':motion'
