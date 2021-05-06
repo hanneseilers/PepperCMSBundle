@@ -38,7 +38,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         QiSDK.register(this, this);
 
         // Create PepperLib object
-        this.pepperLib = new PepperLib();
+        this.pepperLib = new PepperLib(this);
 
         // Process intent data from CMS
         this.pepperLib.processCMSIntent(getIntent());
