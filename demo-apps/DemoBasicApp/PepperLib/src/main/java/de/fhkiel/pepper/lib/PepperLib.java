@@ -95,18 +95,27 @@ public class PepperLib implements RobotLifecycleCallbacks {
     @Override
     public void onRobotFocusGained(QiContext qiContext) {
         this.qiContext = qiContext;
+        if(hasContext() && getContext() instanceof RobotLifecycleCallbacks){
+            ((RobotLifecycleCallbacks) getContext()).onRobotFocusGained(qiContext);
+        }
         Log.d(TAG, "Gained robot focus.");
     }
 
     @Override
     public void onRobotFocusLost() {
         this.qiContext = null;
+        if(hasContext() && getContext() instanceof RobotLifecycleCallbacks){
+            ((RobotLifecycleCallbacks) getContext()).onRobotFocusLost();
+        }
         Log.w(TAG, "Lost robot focus!");
     }
 
     @Override
     public void onRobotFocusRefused(String reason) {
         this.qiContext = null;
+        if(hasContext() && getContext() instanceof  RobotLifecycleCallbacks){
+            ((RobotLifecycleCallbacks) getContext()).onRobotFocusRefused(reason);
+        }
         Log.e(TAG, "Robot focus refused! " + reason);
     }
 
