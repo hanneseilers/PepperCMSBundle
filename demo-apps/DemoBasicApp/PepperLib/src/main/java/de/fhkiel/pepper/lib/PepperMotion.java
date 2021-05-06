@@ -17,7 +17,7 @@ public class PepperMotion {
 
     /**
      * Constructor
-     * @param pepperLib     Reference object to {@link PepperLib}.
+     * @param pepperLib     Reference to {@link PepperLib} object.
      */
     public PepperMotion(PepperLib pepperLib) {
         this.pepperLib = pepperLib;
