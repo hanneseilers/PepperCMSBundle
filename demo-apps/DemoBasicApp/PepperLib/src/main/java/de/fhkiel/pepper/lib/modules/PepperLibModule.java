@@ -13,7 +13,7 @@ abstract class PepperLibModule {
     }
 
     protected void errorNoQiCOntext(String message){
-        Log.e(TAG, "NO QiContext found.\n" +
+        Log.e(TAG, "No QiContext found!\n" +
                 (message != null ? message + "\n" : "") + "Maybe no application did not gained robot focus!");
     }
 }
