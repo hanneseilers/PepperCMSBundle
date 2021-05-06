@@ -2,3 +2,4 @@ rootProject.name = "DemoBasicApp"
 include ':basic'
 include ':PepperLib'
 include ':motion'
+include ':speech'
