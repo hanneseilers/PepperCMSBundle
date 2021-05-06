@@ -7,7 +7,7 @@ import de.fhkiel.pepper.lib.PepperLib;
 abstract class PepperLibModule {
 
     protected final String TAG = this.getClass().getName();
-    protected PepperLib pepperLib;
+    protected final PepperLib pepperLib;
 
     public PepperLibModule(PepperLib pepperLib) {
         this.pepperLib = pepperLib;
@@ -18,6 +18,7 @@ abstract class PepperLibModule {
      * Maybe due to no robot focus.
      * @param message   {@link String} message to sho.
      */
+    @SuppressWarnings("SameParameterValue")
     protected void errorNoQiContext(String message){
         Log.e(TAG, "No QiContext found!\n" +
                 (message != null ? message + "\n" : "") + "Maybe no application did not gained robot focus!");

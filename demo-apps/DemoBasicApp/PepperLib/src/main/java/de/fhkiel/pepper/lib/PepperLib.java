@@ -13,13 +13,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 /**
- * Main class to hadnle basic PepperLib functions
+ * Main class to handle basic PepperLib functions
  */
+@SuppressWarnings("unused")
 public class PepperLib implements RobotLifecycleCallbacks {
 
     private static final String TAG = PepperLib.class.getName();
 
-    // Intent keys cotaining data from CMS
+    // Intent keys containing data from CMS
     private static final String INTENT_KEY_APP = "app";
     private static final String INTENT_KEY_DATA = "data";
     private static final String INTENT_KEY_USER = "user";
@@ -33,9 +34,10 @@ public class PepperLib implements RobotLifecycleCallbacks {
     private QiContext qiContext;
 
     // App Context
-    private Context context;
+    private final Context context;
 
     // Listener
+    @SuppressWarnings("FieldMayBeFinal")
     private ArrayList<PepperLibCMSCallbackListener> pepperLibCMSCallbackListeners = new ArrayList<>();
 
     public PepperLib(Context context) {
@@ -70,7 +72,7 @@ public class PepperLib implements RobotLifecycleCallbacks {
     /**
      * Removes a {@link PepperLibCMSCallbackListener} from internal list.
      * @param listener  {@link PepperLibCMSCallbackListener} to remove from list.
-     * @return          true if successfulle, false otherwise
+     * @return          true if successfully, false otherwise
      */
     public boolean removePepperLibCMSCallbackListener(PepperLibCMSCallbackListener listener){
         return this.pepperLibCMSCallbackListeners.remove(listener);
@@ -85,7 +87,7 @@ public class PepperLib implements RobotLifecycleCallbacks {
     }
 
     /**
-     * Function to get urrent {@link Context} object.
+     * Function to get current {@link Context} object.
      * @return      {@link Context} object or null, if no one set.
      */
     public Context getContext(){
@@ -138,7 +140,7 @@ public class PepperLib implements RobotLifecycleCallbacks {
                     }
                 }
 
-                // User Data: Data about the user loged in to the CMS
+                // User Data: Data about the user logged in to the CMS
                 // Data structure defined by CMS
                 if( intent.hasExtra(INTENT_KEY_USER) ){
                     try {
@@ -170,7 +172,7 @@ public class PepperLib implements RobotLifecycleCallbacks {
     }
 
     /**
-     * Creates a {@link Intent} for returning to CMS on clsoing this app
+     * Creates a {@link Intent} for returning to CMS on closing this app
      * @return  Intent to return to CMS
      */
     public Intent getReturnCMSIntent(){
@@ -192,7 +194,7 @@ public class PepperLib implements RobotLifecycleCallbacks {
     }
 
     /**
-     * Gets informations about this app, passed via intent from CMS
+     * Gets information about this app, passed via intent from CMS
      * @return  Data of this app, null if not available.
      */
     public JSONObject getAppData(){
@@ -200,7 +202,7 @@ public class PepperLib implements RobotLifecycleCallbacks {
     }
 
     /**
-     * Gets informations about the logged in uer, passed via intent from CMS
+     * Gets information about the logged in uer, passed via intent from CMS
      * @return  Data of the logged in user, null if not available.
      */
     public JSONObject getUserData(){
@@ -208,7 +210,7 @@ public class PepperLib implements RobotLifecycleCallbacks {
     }
 
     /**
-     * Gets payload informations for the logged in user and this app, passed via intent from CMS
+     * Gets payload information for the logged in user and this app, passed via intent from CMS
      * @return  Payload data of this app, null if not available.
      */
     public JSONObject getPayloadData(){
@@ -232,9 +234,9 @@ public class PepperLib implements RobotLifecycleCallbacks {
          * Called if intent data was queried
          * @param appData       Data about this app, stored in the CMS
          * @param userData      Data about the user logged in
-         * @param payloadDdata  User specific payload data, stored by this app insied CMS
+         * @param payloadData  User specific payload data, stored by this app inside CMS
          */
-        void onCMSIntentProcessed(JSONObject appData, JSONObject userData, JSONObject payloadDdata);
+        void onCMSIntentProcessed(JSONObject appData, JSONObject userData, JSONObject payloadData);
     }
 
 }

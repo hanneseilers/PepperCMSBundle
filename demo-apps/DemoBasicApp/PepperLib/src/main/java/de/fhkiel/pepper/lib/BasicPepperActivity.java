@@ -14,6 +14,7 @@ import org.json.JSONObject;
 /**
  * Basic Activity to extend for own Pepper Applications
  */
+@SuppressWarnings("unused")
 public class BasicPepperActivity extends RobotActivity implements RobotLifecycleCallbacks, PepperLib.PepperLibCMSCallbackListener {
 
     // Tag for logging
@@ -65,7 +66,7 @@ public class BasicPepperActivity extends RobotActivity implements RobotLifecycle
     }
 
     @Override
-    public void onCMSIntentProcessed(JSONObject appData, JSONObject userData, JSONObject payloadDdata) {
+    public void onCMSIntentProcessed(JSONObject appData, JSONObject userData, JSONObject payloadData) {
         // Intent data is ready
         Log.i(TAG, "Processed CMS Intent.");
     }

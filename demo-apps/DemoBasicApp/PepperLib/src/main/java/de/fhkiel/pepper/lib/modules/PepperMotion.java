@@ -24,22 +24,21 @@ public class PepperMotion extends PepperLibModule {
 
     /**
      * Creates an animation for the robot.
-     * @param animationRescource    Android rescource of the animation (*.qanim)
-     * @return                      Object with {@link Animate} interface, to start the animation or attach listeners.
+     * @param animationResource    Android resource of the animation file.
+     * @return                     Object with {@link Animate} interface, to start the animation or attach listeners.
      */
-    public Animate createAnimation(int animationRescource){
+    public Animate createAnimation(int animationResource){
         if(pepperLib.hasContext() && pepperLib.hasQiContext()){
-            String rescourceName = pepperLib.getContext().getResources().getResourceName(animationRescource);
-            Log.d(TAG, "---- execute animation: " + rescourceName);
+            String resourceName = pepperLib.getContext().getResources().getResourceName(animationResource);
+            Log.d(TAG, "---- execute animation: " + resourceName);
 
             Animation animation = AnimationBuilder.with(pepperLib.getQiContext())
-                    .withResources(animationRescource)
-                    .build();
-            Animate animate = AnimateBuilder.with(pepperLib.getQiContext())
-                    .withAnimation(animation)
+                    .withResources(animationResource)
                     .build();
 
-            return animate;
+            return AnimateBuilder.with(pepperLib.getQiContext())
+                    .withAnimation(animation)
+                    .build();
         }
 
         errorNoQiContext();

@@ -19,11 +19,15 @@ import de.fhkiel.pepper.lib.PepperLib;
 /**
  * Class for robot conversation (speaking and listening)
  */
+@SuppressWarnings("unused")
 public class PepperSpeech extends PepperLibModule {
 
     // Listen options and their defaults
+    @SuppressWarnings("FieldMayBeFinal")
     private BodyLanguageOption listenBodyLanguage = BodyLanguageOption.NEUTRAL;
+    @SuppressWarnings("FieldMayBeFinal")
     private Language listenLanguage = Language.ENGLISH;
+    @SuppressWarnings("FieldMayBeFinal")
     private Region listenRegion = Region.UNITED_KINGDOM;
 
     /**
