@@ -13,7 +13,6 @@ import com.aldebaran.qi.sdk.object.actuation.Animation;
 public class PepperMotion {
 
     private static final String TAG = PepperMotion.class.getName();
-
     private PepperLib pepperLib;
 
     /**
