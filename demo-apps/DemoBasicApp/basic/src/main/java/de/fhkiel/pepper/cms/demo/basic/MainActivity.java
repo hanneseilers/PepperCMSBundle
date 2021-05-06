@@ -22,6 +22,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     // Tag for logging
     private static final String TAG = MainActivity.class.getName();
 
+    // Reference to Pepper Library
     public PepperLib pepperLib;
 
     @Override
@@ -46,7 +47,6 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
             // Demo setting intent result to return to CMS
             // Data is tored in CMS with the user currently logged in and passed back
             // as Intent data for this user on next App start
-            /* Uncomment to use putting data back to CMS
             try {
                 JSONObject payloadData = new JSONObject();
                 payloadData.put( "timestamp", (new Date()).getTime() );
@@ -54,7 +54,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
             } catch (JSONException e){
                 Log.w( TAG, e);
             }
-            */
+
 
             closeApp();
         });
