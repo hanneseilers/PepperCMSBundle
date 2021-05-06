@@ -31,7 +31,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         setContentView(R.layout.activity_main);
 
         // hide big speech bar
-        //setSpeechBarDisplayStrategy( SpeechBarDisplayStrategy.IMMERSIVE );
+        setSpeechBarDisplayStrategy( SpeechBarDisplayStrategy.IMMERSIVE );
 
         // Register Robot SDK
         QiSDK.register(this, this);
