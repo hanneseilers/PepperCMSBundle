@@ -13,7 +13,6 @@
             <option value="$PROJECT_DIR$/PepperLib" />
             <option value="$PROJECT_DIR$/basic" />
             <option value="$PROJECT_DIR$/motion" />
-            <option value="$PROJECT_DIR$/speech" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
