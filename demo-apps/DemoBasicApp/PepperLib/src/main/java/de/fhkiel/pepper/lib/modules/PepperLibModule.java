@@ -17,7 +17,7 @@ abstract class PepperLibModule {
      * Maybe due to no robot focus.
      * @param message   {@link String} message to sho.
      */
-    protected void errorNoQiCOntext(String message){
+    protected void errorNoQiContext(String message){
         Log.e(TAG, "No QiContext found!\n" +
                 (message != null ? message + "\n" : "") + "Maybe no application did not gained robot focus!");
     }
@@ -26,7 +26,7 @@ abstract class PepperLibModule {
      * Showing log error that no {@link com.aldebaran.qi.sdk.QiContext} is found.
      * Maybe due to no robot focus.
      */
-    protected void errorNoQiCOntext(){
-        errorNoQiCOntext(null);
+    protected void errorNoQiContext(){
+        errorNoQiContext(null);
     }
 }

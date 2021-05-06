@@ -49,7 +49,7 @@ public class PepperSpeech extends PepperLibModule {
                     .withPhrases(phraseArrayList).build();
         }
 
-        errorNoQiCOntext();
+        errorNoQiContext();
         return null;
     }
 
@@ -90,7 +90,7 @@ public class PepperSpeech extends PepperLibModule {
                     .build();
         }
 
-        errorNoQiCOntext();
+        errorNoQiContext();
         return null;
     }
 }
