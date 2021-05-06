@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.aldebaran.qi.sdk.QiContext;
+import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -12,7 +15,7 @@ import java.util.Date;
 
 import de.fhkiel.pepper.lib.BasicPepperActivity;
 
-public class BasicActivity extends BasicPepperActivity {
+public class BasicActivity extends BasicPepperActivity implements RobotLifecycleCallbacks {
 
     // Tag for logging
     private static final String TAG = BasicActivity.class.getName();
@@ -50,4 +53,27 @@ public class BasicActivity extends BasicPepperActivity {
         this.finishAndRemoveTask();
     }
 
+    /*
+        Implementing RobotLifecycleCallbacks interface to get callbacks on robot focus.
+        ATTENTION! The extended BasicPepperActivity handels the rgistration at the QiSDK
+        Also super() Function must be called! Otherwise the PepperLib is not working!
+     */
+
+    @Override
+    public void onRobotFocusGained(QiContext qiContext) {
+        super.onRobotFocusGained(qiContext);
+        Log.i(TAG, "Robot focus gained.");
+    }
+
+    @Override
+    public void onRobotFocusLost() {
+        super.onRobotFocusLost();
+        Log.w(TAG, "Robot focus lost!");
+    }
+
+    @Override
+    public void onRobotFocusRefused(String reason) {
+        super.onRobotFocusRefused(reason);
+        Log.e(TAG, "Robot focus refused: " + reason + "!");
+    }
 }
