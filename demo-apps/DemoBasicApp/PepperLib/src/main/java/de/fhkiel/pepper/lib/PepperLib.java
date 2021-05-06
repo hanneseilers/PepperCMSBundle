@@ -1,5 +1,6 @@
 package de.fhkiel.pepper.lib;
 
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
@@ -11,6 +12,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * Main class to hadnle basic PepperLib functions
+ */
 public class PepperLib implements RobotLifecycleCallbacks {
 
     private static final String TAG = PepperLib.class.getName();
@@ -28,15 +32,30 @@ public class PepperLib implements RobotLifecycleCallbacks {
     // Robot context
     private QiContext qiContext;
 
+    // App Context
+    private Context context;
+
     // Listener
     private ArrayList<PepperLibCMSCallbackListener> pepperLibCMSCallbackListeners = new ArrayList<>();
 
+    public PepperLib(Context context) {
+        this.context = context;
+    }
+
     /**
-     * Checks fi lib has {@link QiContext}.
-     * @return  true if lib has context, false otherwise.
+     * Checks if lib has {@link QiContext} object.
+     * @return  true if lib has {@link QiContext} object, false otherwise.
      */
     public boolean hasQiContext(){
         return (this.qiContext != null);
+    }
+
+    /**
+     * Checks if lib has {@link Context} object.
+     * @return  true if lib has {@link Context} object, false otherwise.
+     */
+    public boolean hasContext(){
+        return (this.context != null);
     }
 
     /**
@@ -55,6 +74,22 @@ public class PepperLib implements RobotLifecycleCallbacks {
      */
     public boolean removePepperLibCMSCallbackListener(PepperLibCMSCallbackListener listener){
         return this.pepperLibCMSCallbackListeners.remove(listener);
+    }
+
+    /**
+     * Function to get the current {@link QiContext} object.
+     * @return      {@link QiContext} object or null, if no one set.
+     */
+    public QiContext getQiContext() {
+        return qiContext;
+    }
+
+    /**
+     * Function to get urrent {@link Context} object.
+     * @return      {@link Context} object or null, if no one set.
+     */
+    public Context getContext(){
+        return context;
     }
 
     @Override
