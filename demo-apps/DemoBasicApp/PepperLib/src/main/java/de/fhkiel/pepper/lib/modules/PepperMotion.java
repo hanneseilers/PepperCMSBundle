@@ -1,4 +1,4 @@
-package de.fhkiel.pepper.lib;
+package de.fhkiel.pepper.lib.modules;
 
 import android.util.Log;
 
@@ -7,20 +7,19 @@ import com.aldebaran.qi.sdk.builder.AnimationBuilder;
 import com.aldebaran.qi.sdk.object.actuation.Animate;
 import com.aldebaran.qi.sdk.object.actuation.Animation;
 
+import de.fhkiel.pepper.lib.PepperLib;
+
 /**
  * Class for basic motion commands
  */
-public class PepperMotion {
-
-    private static final String TAG = PepperMotion.class.getName();
-    private PepperLib pepperLib;
+public class PepperMotion extends PepperLibModule {
 
     /**
      * Constructor
      * @param pepperLib     Reference to {@link PepperLib} object.
      */
     public PepperMotion(PepperLib pepperLib) {
-        this.pepperLib = pepperLib;
+        super(pepperLib);
     }
 
     /**
