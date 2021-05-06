@@ -13,7 +13,7 @@ import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayS
 import com.aldebaran.qi.sdk.object.actuation.Animate;
 
 import de.fhkiel.pepper.lib.PepperLib;
-import de.fhkiel.pepper.lib.PepperMotion;
+import de.fhkiel.pepper.lib.modules.PepperMotion;
 
 public class MotionActivity extends RobotActivity implements RobotLifecycleCallbacks {
 
