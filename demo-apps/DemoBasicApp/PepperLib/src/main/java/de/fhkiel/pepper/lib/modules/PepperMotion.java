@@ -42,6 +42,7 @@ public class PepperMotion extends PepperLibModule {
             return animate;
         }
 
+        errorNoQiCOntext();
         return null;
     }
 
