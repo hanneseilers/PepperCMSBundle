@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.aldebaran.qi.sdk.QiContext;
-import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,7 +14,7 @@ import java.util.Date;
 
 import de.fhkiel.pepper.lib.BasicPepperActivity;
 
-public class BasicActivity extends BasicPepperActivity implements RobotLifecycleCallbacks {
+public class BasicActivity extends BasicPepperActivity{
 
     // Tag for logging
     private static final String TAG = BasicActivity.class.getName();
