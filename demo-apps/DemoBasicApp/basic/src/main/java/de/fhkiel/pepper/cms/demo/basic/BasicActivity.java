@@ -48,14 +48,13 @@ public class BasicActivity extends RobotActivity implements RobotLifecycleCallba
             // Demo setting intent result to return to CMS
             // Data is tored in CMS with the user currently logged in and passed back
             // as Intent data for this user on next App start
-            try {
+            /*try {
                 JSONObject payloadData = new JSONObject();
                 payloadData.put( "timestamp", (new Date()).getTime() );
                 Log.d( TAG, "set timestamp as result");
             } catch (JSONException e){
                 Log.w( TAG, e);
-            }
-
+            }*/
 
             closeApp();
         });
