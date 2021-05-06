@@ -48,6 +48,8 @@ public class PepperSpeech extends PepperLibModule {
             return PhraseSetBuilder.with( pepperLib.getQiContext() )
                     .withPhrases(phraseArrayList).build();
         }
+
+        errorNoQiCOntext();
         return null;
     }
 
@@ -87,6 +89,8 @@ public class PepperSpeech extends PepperLibModule {
                     .withLocale(new Locale(listenLanguage, listenRegion))
                     .build();
         }
+
+        errorNoQiCOntext();
         return null;
     }
 }
