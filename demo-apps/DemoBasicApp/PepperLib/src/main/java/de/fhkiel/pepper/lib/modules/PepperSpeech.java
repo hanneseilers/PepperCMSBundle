@@ -63,19 +63,6 @@ public class PepperSpeech extends PepperLibModule {
     }
 
     /**
-     * Build a set of phrases to make the robot listen to.
-     * @param texts     Unlimited number of {@link String} arguments that belong to one {@link PhraseSet} (context).
-     * @return          {@link PhraseSet}, or null, if failed.
-     */
-    public PhraseSet creatPhraseSet(String... texts){
-        List<String> list = new ArrayList<>();
-        for(String text : texts){
-            list.add(text);
-        }
-        return createPhraseSet(list);
-    }
-
-    /**
      * Creates an object of interface {@link Listen} to let the robot listen to some {@link PhraseSet}s
      * Uses the set body language option, as well as language and region settings.
      * @param phrases   {@link List} of {@link PhraseSet}s the robot should listen to.
@@ -92,5 +79,15 @@ public class PepperSpeech extends PepperLibModule {
 
         errorNoQiContext();
         return null;
+    }
+
+    /**
+     * Creates an object of interface {@link Listen} to let the robot listen to some {@link PhraseSet}s
+     * Uses the set body language option, as well as language and region settings.
+     * @param phrases   Array of {@link PhraseSet}s the robot should listen to.
+     * @return          Object of {@link Listen} interface, or null if failed.
+     */
+    public Listen listen(PhraseSet[] phrases){
+        return listen( new ArrayList<>(Arrays.asList(phrases)) );
     }
 }
