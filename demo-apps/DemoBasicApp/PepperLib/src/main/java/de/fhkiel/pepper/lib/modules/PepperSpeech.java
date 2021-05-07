@@ -30,7 +30,7 @@ public class PepperSpeech extends PepperLibModule {
     @SuppressWarnings("FieldMayBeFinal")
     private Language listenLanguage = Language.ENGLISH;
     @SuppressWarnings("FieldMayBeFinal")
-    private Region listenRegion = Region.UNITED_KINGDOM;
+    private Region listenRegion = Region.UNITED_STATES;
 
     // Say options and their defaults
     @SuppressWarnings("FieldMayBeFinal")
@@ -38,7 +38,7 @@ public class PepperSpeech extends PepperLibModule {
     @SuppressWarnings("FieldMayBeFinal")
     private Language sayLanguage = Language.ENGLISH;
     @SuppressWarnings("FieldMayBeFinal")
-    private Region sayRegion = Region.UNITED_KINGDOM;
+    private Region sayRegion = Region.UNITED_STATES;
 
     /**
      * Constructor
