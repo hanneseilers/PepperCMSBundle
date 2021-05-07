@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">DemoSpeechApp</string>
+
+    <string name="btnListenPhraseAdd">Add Phrase</string>
+    <string name="btnListenPhraseClear">Clear list</string>
+    <string name="btnListen">Listen</string>
+
+    <string name="txtPhrasesTitle">Phrases to listen to:</string>
+    <string name="txtHeardWordTitle">Heard word:</string>
 </resources>
