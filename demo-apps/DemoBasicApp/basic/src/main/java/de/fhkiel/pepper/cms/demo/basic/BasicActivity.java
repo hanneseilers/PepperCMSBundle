@@ -32,7 +32,7 @@ public class BasicActivity extends BasicPepperActivity{
             try {
                 JSONObject payloadData = new JSONObject();
                 payloadData.put( "timestamp", (new Date()).getTime() );
-                this.pepperLib.setPayloadData(payloadData);
+                getPepperLib().setPayloadData(payloadData);
                 Log.d( TAG, "set timestamp as result");
             } catch (JSONException e){
                 Log.w( TAG, e);
@@ -46,7 +46,7 @@ public class BasicActivity extends BasicPepperActivity{
      *  Closes app and includes data inside return intent
      */
     private void closeApp(){
-        Intent intent = pepperLib.getReturnCMSIntent();
+        Intent intent = getPepperLib().getReturnCMSIntent();
         Log.d( TAG, "set result intent" );
         setResult( Activity.RESULT_OK, intent );
         this.finishAndRemoveTask();
