@@ -6,7 +6,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +21,8 @@ import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayS
 import com.aldebaran.qi.sdk.object.conversation.Listen;
 import com.aldebaran.qi.sdk.object.conversation.ListenResult;
 import com.aldebaran.qi.sdk.object.conversation.PhraseSet;
+import com.aldebaran.qi.sdk.object.locale.Language;
+import com.aldebaran.qi.sdk.object.locale.Region;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +45,30 @@ public class FragmentListen extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
          rootLayout = inflater.inflate( R.layout.fragment_listen, container,false );
+
+         // populate spinner locale options
+        // get widgets
+        Spinner spinLanguage = rootLayout.findViewById(R.id.spinLanguage);
+        Spinner spinRegion = rootLayout.findViewById(R.id.spinRegion);
+
+        // convert option enums to string lists
+        List<String> languages = new ArrayList<>();
+        for(Language language : Language.values()){
+            languages.add( language.name() );
+        }
+        List<String> regions = new ArrayList<>();
+        for(Region region : Region.values()){
+            regions.add( region.name() );
+        }
+
+        // populate spinners
+        SpinnerAdapter spinnerAdapterLanguage = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, languages);
+        SpinnerAdapter spinnerAdapterRegion = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, regions);
+        spinLanguage.setAdapter( spinnerAdapterLanguage );
+        spinRegion.setAdapter( spinnerAdapterRegion );
+
+        // set defaults
+        // TODO
 
          // attach listeners
         // adds a phrase to list
@@ -146,4 +175,5 @@ public class FragmentListen extends Fragment {
                     " must implement PepperLibActivity interface!");
         }
     }
+
 }

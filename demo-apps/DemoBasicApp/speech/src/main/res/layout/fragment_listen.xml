@@ -42,30 +42,98 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/txtPhrasesTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="#CDDC39"
-        android:padding="2dp"
-        android:text="@string/txtListenPhrasesTitle"
-        android:textAlignment="textStart"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <TextView
-        android:id="@+id/txtListenListPhrases"
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:fadeScrollbars="true"
-        android:scrollbars="vertical"
-        android:textAlignment="textStart"
+        android:baselineAligned="false"
         app:layout_constraintBottom_toTopOf="@+id/btnListenStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPhrasesTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/txtPhrasesTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#CDDC39"
+                android:padding="2dp"
+                android:text="@string/txtListenPhrasesTitle"
+                android:textAlignment="textStart"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtListenListPhrases"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:fadeScrollbars="true"
+                android:padding="2dp"
+                android:scrollbars="vertical"
+                android:textAlignment="textStart"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtPhrasesTitle" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#F5F5F5F5"
+            app:layout_constraintBottom_toTopOf="@+id/btnListenStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+            <TextView
+                android:id="@+id/txtListenOptionsTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#CDDC39"
+                android:padding="2dp"
+                android:text="@string/txtListenOptionsTitle"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Spinner
+                android:id="@+id/spinLanguage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtListenOptionsTitle" />
+
+            <Spinner
+                android:id="@+id/spinRegion"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinLanguage" />
+
+            <Button
+                android:id="@+id/btnListenOptionsSet"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/btnListenOptionsSet"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinRegion" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/btnListenStart"
