@@ -2,10 +2,12 @@ package de.fhkiel.pepper.lib.modules;
 
 import com.aldebaran.qi.sdk.builder.ListenBuilder;
 import com.aldebaran.qi.sdk.builder.PhraseSetBuilder;
+import com.aldebaran.qi.sdk.builder.SayBuilder;
 import com.aldebaran.qi.sdk.object.conversation.BodyLanguageOption;
 import com.aldebaran.qi.sdk.object.conversation.Listen;
 import com.aldebaran.qi.sdk.object.conversation.Phrase;
 import com.aldebaran.qi.sdk.object.conversation.PhraseSet;
+import com.aldebaran.qi.sdk.object.conversation.Say;
 import com.aldebaran.qi.sdk.object.locale.Language;
 import com.aldebaran.qi.sdk.object.locale.Locale;
 import com.aldebaran.qi.sdk.object.locale.Region;
@@ -30,12 +32,68 @@ public class PepperSpeech extends PepperLibModule {
     @SuppressWarnings("FieldMayBeFinal")
     private Region listenRegion = Region.UNITED_KINGDOM;
 
+    // Say options and their defaults
+    @SuppressWarnings("FieldMayBeFinal")
+    private BodyLanguageOption sayBodyLanguage = BodyLanguageOption.NEUTRAL;
+    @SuppressWarnings("FieldMayBeFinal")
+    private Language sayLanguage = Language.ENGLISH;
+    @SuppressWarnings("FieldMayBeFinal")
+    private Region sayRegion = Region.UNITED_KINGDOM;
+
     /**
      * Constructor
      * @param pepperLib     Reference to {@link PepperLib} object.
      */
     public PepperSpeech(PepperLib pepperLib) {
         super(pepperLib);
+    }
+
+    public BodyLanguageOption getListenBodyLanguage() {
+        return listenBodyLanguage;
+    }
+
+    public void setListenBodyLanguage(BodyLanguageOption listenBodyLanguage) {
+        this.listenBodyLanguage = listenBodyLanguage;
+    }
+
+    public Language getListenLanguage() {
+        return listenLanguage;
+    }
+
+    public void setListenLanguage(Language listenLanguage) {
+        this.listenLanguage = listenLanguage;
+    }
+
+    public Region getListenRegion() {
+        return listenRegion;
+    }
+
+    public void setListenRegion(Region listenRegion) {
+        this.listenRegion = listenRegion;
+    }
+
+    public BodyLanguageOption getSayBodyLanguage() {
+        return sayBodyLanguage;
+    }
+
+    public void setSayBodyLanguage(BodyLanguageOption sayBodyLanguage) {
+        this.sayBodyLanguage = sayBodyLanguage;
+    }
+
+    public Language getSayLanguage() {
+        return sayLanguage;
+    }
+
+    public void setSayLanguage(Language sayLanguage) {
+        this.sayLanguage = sayLanguage;
+    }
+
+    public Region getSayRegion() {
+        return sayRegion;
+    }
+
+    public void setSayRegion(Region sayRegion) {
+        this.sayRegion = sayRegion;
     }
 
     /**
@@ -95,7 +153,25 @@ public class PepperSpeech extends PepperLibModule {
         return listen( new ArrayList<>(Arrays.asList(phrases)) );
     }
 
-    //TODO: Say
+    /**
+     * Let the robot say a text using the set options.
+     * @param phrase    {@link Phrase} to say.
+     * @return          Object of {@link Say} interface.
+     */
+    public Say say(Phrase phrase){
+        if(pepperLib.hasQiContext()){
+            return SayBuilder.with(pepperLib.getQiContext())
+                    .withPhrase(phrase)
+                    .withBodyLanguageOption(sayBodyLanguage)
+                    .withLocale( new Locale(sayLanguage, sayRegion) )
+                    .build();
+        }
+        return null;
+    }
+
+    public Say say(String text){
+        return say(new Phrase(text));
+    }
 
     //TODO: Chatbot
 }
