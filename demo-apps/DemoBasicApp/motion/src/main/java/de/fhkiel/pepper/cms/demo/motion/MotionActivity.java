@@ -9,15 +9,19 @@ import com.aldebaran.qi.sdk.QiContext;
 import com.aldebaran.qi.sdk.QiSDK;
 import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
 import com.aldebaran.qi.sdk.design.activity.RobotActivity;
+import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayPosition;
 import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayStrategy;
 import com.aldebaran.qi.sdk.object.actuation.Animate;
 
+import de.fhkiel.pepper.lib.BasicPepperActivity;
 import de.fhkiel.pepper.lib.PepperLib;
 import de.fhkiel.pepper.lib.modules.PepperMotion;
 
-public class MotionActivity extends RobotActivity implements RobotLifecycleCallbacks {
+public class MotionActivity extends BasicPepperActivity implements RobotLifecycleCallbacks {
 
     private static final String TAG = MotionActivity.class.getName();
+
+    // hide big speech bar
 
     // Reference to Pepper Library
     public PepperLib pepperLib;
@@ -31,7 +35,7 @@ public class MotionActivity extends RobotActivity implements RobotLifecycleCallb
         setContentView(R.layout.activity_main);
 
         // hide big speech bar
-        setSpeechBarDisplayStrategy( SpeechBarDisplayStrategy.IMMERSIVE );
+        setSpeechBarStrategy(SpeechBarDisplayStrategy.IMMERSIVE, SpeechBarDisplayPosition.TOP);
 
         // Register Robot SDK
         QiSDK.register(this, this);

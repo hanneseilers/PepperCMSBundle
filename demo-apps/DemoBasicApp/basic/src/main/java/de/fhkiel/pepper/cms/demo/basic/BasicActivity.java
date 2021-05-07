@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.aldebaran.qi.sdk.QiContext;
+import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayPosition;
+import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayStrategy;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,6 +25,9 @@ public class BasicActivity extends BasicPepperActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // hide big speech bar
+        setSpeechBarStrategy(SpeechBarDisplayStrategy.IMMERSIVE, SpeechBarDisplayPosition.TOP);
 
         // close app on button click and set timestamp to return data
         findViewById(R.id.btnClose).setOnClickListener(v -> {
