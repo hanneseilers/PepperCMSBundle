@@ -42,11 +42,7 @@ public class BasicPepperActivity extends RobotActivity implements RobotLifecycle
 
     }
 
-    /**
-     * Sets the robot speechbar options.Should be calle in onCreate()
-     * @param strategy  {@link SpeechBarDisplayStrategy} stategy
-     * @param position  {@link SpeechBarDisplayPosition} position
-     */
+    @Override
     public void setSpeechBarStrategy(SpeechBarDisplayStrategy strategy, SpeechBarDisplayPosition position){
         setSpeechBarDisplayStrategy(strategy);
         setSpeechBarDisplayPosition(position);
