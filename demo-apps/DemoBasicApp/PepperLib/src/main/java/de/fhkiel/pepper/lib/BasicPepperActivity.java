@@ -15,13 +15,13 @@ import org.json.JSONObject;
  * Basic Activity to extend for own Pepper Applications
  */
 @SuppressWarnings("unused")
-public class BasicPepperActivity extends RobotActivity implements RobotLifecycleCallbacks, PepperLib.PepperLibCMSCallbackListener {
+public class BasicPepperActivity extends RobotActivity implements RobotLifecycleCallbacks, PepperLib.PepperLibCMSCallbackListener, PepperLibActivity {
 
     // Tag for logging
     private static final String TAG = BasicPepperActivity.class.getName();
 
     // Reference to Pepper Library
-    public PepperLib pepperLib;
+    private PepperLib pepperLib;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,11 @@ public class BasicPepperActivity extends RobotActivity implements RobotLifecycle
     protected void onDestroy() {
         QiSDK.unregister(this, this);
         super.onDestroy();
+    }
+
+    @Override
+    public PepperLib getPepperLib() {
+        return pepperLib;
     }
 
     @Override
