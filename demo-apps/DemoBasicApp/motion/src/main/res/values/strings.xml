@@ -1,11 +1,9 @@
 <resources>
     <string name="app_name">DemoMotionApp</string>
 
-    <string name="sayFocusGained">Robot focus gained.</string>
-
     <string name="txtHeader">Select Animation Type:</string>
     <string name="txtLabels">- animation labels -</string>
     <string name="btnAnimationDance">Dance Animation</string>
     <string name="btnAnimationLabels">Animation with Labels</string>
-    <string name="btnTrajectory">Movement Tracjectory</string>
+    <string name="btnTrajectory">Movement Trajectory</string>
 </resources>

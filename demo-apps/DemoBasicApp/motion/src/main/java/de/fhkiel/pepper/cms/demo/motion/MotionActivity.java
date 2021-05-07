@@ -45,18 +45,16 @@ public class MotionActivity extends RobotActivity implements RobotLifecycleCallb
     }
 
     /**
-     * Executes an async animation with given animation rescource.
-     * @param animationRescource        Rescource of animation
+     * Executes an async animation with given animation resource.
+     * @param animationResource        Resource of animation
      */
-    private void executeAnimationAsync(int animationRescource){
+    private void executeAnimationAsync(int animationResource){
         new Thread(() -> {
             setAnimationLabelText( "" );
-            Animate animate = pepperMotion.createAnimation(animationRescource);
+            Animate animate = pepperMotion.createAnimation(animationResource);
 
             // attach label listener
-            animate.addOnStartedListener(() -> {
-                Log.d(TAG, "---- started " + animationRescource + " animation");
-            });
+            animate.addOnStartedListener(() -> Log.d(TAG, "---- started " + animationResource + " animation"));
             animate.addOnLabelReachedListener((label, time) -> {
                 Log.i(TAG, "LABEL REACHED: " + label + " @ " + time);
                 setAnimationLabelText( time + ": " + label );
@@ -64,7 +62,7 @@ public class MotionActivity extends RobotActivity implements RobotLifecycleCallb
 
             Future<Void> future = animate.async().run();
             future.andThenConsume(value -> {
-                Log.d(TAG, "---- animation " + animationRescource + " ended");
+                Log.d(TAG, "---- animation " + animationResource + " ended");
                 setAnimationLabelText( "" );
             });
 
@@ -73,34 +71,31 @@ public class MotionActivity extends RobotActivity implements RobotLifecycleCallb
     }
 
     /**
-     *  Executes an sync animation with given animation rescource.
+     *  Executes an sync animation with given animation resource.
      *  Need to be executed outside ui or main loop!
-     *  @param animationRescource        Rescource of animation
+     *  @param animationResource        Resource of animation
      */
-    private void executeAnimation(int animationRescource){
+    @SuppressWarnings("SameParameterValue")
+    private void executeAnimation(int animationResource){
         setAnimationLabelText( "" );
-        Animate animate = pepperMotion.createAnimation(animationRescource);
+        Animate animate = pepperMotion.createAnimation(animationResource);
 
         // attach label listener
-        animate.addOnStartedListener(() -> {
-            Log.d(TAG, "---- started " + animationRescource + " animation");
-        });
+        animate.addOnStartedListener(() -> Log.d(TAG, "---- started " + animationResource + " animation"));
         animate.addOnLabelReachedListener((label, time) -> {
             Log.i(TAG, "LABEL REACHED: " + label + " @ " + time);
             setAnimationLabelText( time + ": " + label );
         });
 
         // HERE ANIMATION IS NOT EXECUTED ASYNC! FUNCTION WILL WAIT UNTIL IT ENDS
-        // YOU CAN NOT DO ANITHING ELSE UNTIL IT FINISHED!
+        // YOU CAN NOT DO ANYTHING ELSE UNTIL IT FINISHED!
         animate.run();
-        Log.d(TAG, "---- animation " + animationRescource + " ended");
+        Log.d(TAG, "---- animation " + animationResource + " ended");
         setAnimationLabelText( "" );
     }
 
     private void setAnimationLabelText(String text){
-        runOnUiThread(() -> {
-            ((TextView) findViewById(R.id.txtLabels)).setText(text);
-        });
+        runOnUiThread(() -> ((TextView) findViewById(R.id.txtLabels)).setText(text));
     }
 
     @Override
@@ -115,19 +110,13 @@ public class MotionActivity extends RobotActivity implements RobotLifecycleCallb
         Log.d(TAG, "Robot focus gained.");
 
         // connect buttons
-        findViewById(R.id.btnAnimation).setOnClickListener(v -> {
-            executeAnimationAsync(R.raw.dance_b005);
-        });
-        findViewById(R.id.btnAnimationLabels).setOnClickListener(v -> {
-            executeAnimationAsync(R.raw.salute_right_b001);
-        });
-        findViewById(R.id.btnTrajectory).setOnClickListener(v -> {
-            new Thread(() -> {
-                Log.i(TAG, "executed before animation");
-                executeAnimation(R.raw.trajectory_00);
-                Log.i(TAG, "Executed after animation");
-            } ).start();
-        });
+        findViewById(R.id.btnAnimation).setOnClickListener(v -> executeAnimationAsync(R.raw.dance_b005));
+        findViewById(R.id.btnAnimationLabels).setOnClickListener(v -> executeAnimationAsync(R.raw.salute_right_b001));
+        findViewById(R.id.btnTrajectory).setOnClickListener(v -> new Thread(() -> {
+            Log.i(TAG, "executed before animation");
+            executeAnimation(R.raw.trajectory_00);
+            Log.i(TAG, "Executed after animation");
+        } ).start());
     }
 
     @Override
