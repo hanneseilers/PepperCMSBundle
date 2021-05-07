@@ -1,12 +1,4 @@
 <resources>
     <string name="app_name">DemoBasicApp</string>
-
-    <string name="sayFocusGained">Focus Gained</string>
-    <string name="sayCloseApp">Close App and return</string>
-
-    <string name="txtIntentApp">- APP -</string>
-    <string name="txtIntentUser">- USER -</string>
-    <string name="txtIntentData">- DATA -</string>
-
     <string name="btnClose">Close &amp; set timestamp</string>
 </resources>

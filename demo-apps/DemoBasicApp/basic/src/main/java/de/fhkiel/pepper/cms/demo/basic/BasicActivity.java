@@ -27,7 +27,7 @@ public class BasicActivity extends BasicPepperActivity{
         // close app on button click and set timestamp to return data
         findViewById(R.id.btnClose).setOnClickListener(v -> {
             // Demo setting intent result to return to CMS
-            // Data is tored in CMS with the user currently logged in and passed back
+            // Data is stored in CMS with the user currently logged in and passed back
             // as Intent data for this user on next App start
             try {
                 JSONObject payloadData = new JSONObject();
@@ -54,7 +54,7 @@ public class BasicActivity extends BasicPepperActivity{
 
     /*
         Implementing RobotLifecycleCallbacks interface to get callbacks on robot focus.
-        ATTENTION! The extended BasicPepperActivity handels the rgistration at the QiSDK
+        ATTENTION! The extended BasicPepperActivity handles the registration at the QiSDK
         Also super() Function must be called! Otherwise the PepperLib is not working!
      */
 
