@@ -7,10 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +24,8 @@ import com.aldebaran.qi.sdk.object.conversation.PhraseSet;
 import com.aldebaran.qi.sdk.object.locale.Language;
 import com.aldebaran.qi.sdk.object.locale.Region;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +35,7 @@ import de.fhkiel.pepper.lib.modules.PepperSpeech;
 /**
  * Fragment for robots listen function
  */
+@SuppressWarnings("ConstantConditions")
 public class FragmentListen extends Fragment {
 
     private static final String TAG = FragmentListen.class.getName();
@@ -42,8 +43,9 @@ public class FragmentListen extends Fragment {
     private View rootLayout;
 
     private PepperSpeech pepperSpeech;
-    private ArrayList<String> listPhrases = new ArrayList<>();
+    private final ArrayList<String> listPhrases = new ArrayList<>();
 
+    @SuppressWarnings("CodeBlock2Expr")
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -64,15 +66,15 @@ public class FragmentListen extends Fragment {
         for(Region region : Region.values()){
             regions.add( region.name() );
         }
-        List<String> bodyLanguagOptions = new ArrayList<>();
+        List<String> bodyLanguageOptions = new ArrayList<>();
         for(BodyLanguageOption bodyLanguageOption : BodyLanguageOption.values()){
-            bodyLanguagOptions.add( bodyLanguageOption.name() );
+            bodyLanguageOptions.add( bodyLanguageOption.name() );
         }
 
         // populate spinners
         ArrayAdapter<String> spinnerAdapterLanguage = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, languages);
         ArrayAdapter<String> spinnerAdapterRegion = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, regions);
-        ArrayAdapter<String> spinnerAdapterBodyLanguageOption = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, bodyLanguagOptions);
+        ArrayAdapter<String> spinnerAdapterBodyLanguageOption = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, bodyLanguageOptions);
         spinLanguage.setAdapter( spinnerAdapterLanguage );
         spinRegion.setAdapter( spinnerAdapterRegion );
         spinBodyLanguage.setAdapter( spinnerAdapterBodyLanguageOption );
@@ -137,12 +139,13 @@ public class FragmentListen extends Fragment {
         // set options
         rootLayout.findViewById(R.id.btnListenOptionsSet).setOnClickListener(v -> {
             new Thread(() -> {
-                String strLanguage = (String) ((Spinner) rootLayout.findViewById(R.id.spinLanguage)).getSelectedItem();
-                String strRegion = (String) ((Spinner) rootLayout.findViewById(R.id.spinRegion)).getSelectedItem();
-                String strBodyLanguageOption = (String) ((Spinner) rootLayout.findViewById(R.id.spinListenBodyLanguage)).getSelectedItem();
+                String strLanguage = (String) spinLanguage.getSelectedItem();
+                String strRegion = (String) spinRegion.getSelectedItem();
+                String strBodyLanguageOption = (String) spinBodyLanguage.getSelectedItem();
                 getPepperSpeech().setListenLanguage( Language.valueOf(strLanguage) );
                 getPepperSpeech().setListenRegion( Region.valueOf(strRegion) );
                 getPepperSpeech().setListenBodyLanguage( BodyLanguageOption.valueOf(strBodyLanguageOption) );
+                //noinspection CodeBlock2Expr
                 getActivity().runOnUiThread(() -> {
                     Toast.makeText(getActivity(), R.string.msgListenOptionSet, Toast.LENGTH_LONG).show();
                 });
@@ -160,15 +163,15 @@ public class FragmentListen extends Fragment {
     private void updatePhrasesList(List<String> phrases){
         getActivity().runOnUiThread(() -> {
             TextView txtList = rootLayout.findViewById(R.id.txtListenListPhrases);
-            String text = "";
+            StringBuilder text = new StringBuilder();
             for(String phrase : phrases){
                 Log.d(TAG, "adding phrase " + phrase + " to TextView");
                 if(text.length() > 0){
-                    text += "\n";
+                    text.append("\n");
                 }
-                text += phrase;
+                text.append(phrase);
             }
-            txtList.setText(text);
+            txtList.setText(text.toString());
             txtList.invalidate();
             Log.d(TAG, "Updated TextView");
         });
@@ -183,7 +186,7 @@ public class FragmentListen extends Fragment {
 
         List<PhraseSet> phrases = new ArrayList<>();
 
-        // extract comma seperated list as list of PhraseSets
+        // extract comma separated list as list of PhraseSets
         Log.d(TAG, "building list of Phrases from String list.");
         for(String strPhrases : list){
             PhraseSet phraseSet = getPepperSpeech().createPhraseSet( strPhrases.split(",") );
@@ -197,7 +200,7 @@ public class FragmentListen extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         if(context instanceof PepperLibActivity){
             this.pepperLibActivity = (PepperLibActivity) context;

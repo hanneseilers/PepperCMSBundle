@@ -13,8 +13,6 @@
     <string name="txtListenHeardWordTitle">Heard word:</string>
     <string name="txtListenOptionsTitle">Language Options:</string>
 
-    <string name="chkListenBodylanguage">Enable Body Language</string>
-
     <string name="msgListenOptionSet">Options set</string>
     <string name="msgListenNoPhrasesFound">Set phrases to listen to!</string>
 </resources>
