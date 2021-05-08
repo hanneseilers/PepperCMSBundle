@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
@@ -18,6 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayPosition;
 import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayStrategy;
+import com.aldebaran.qi.sdk.object.conversation.BodyLanguageOption;
 import com.aldebaran.qi.sdk.object.conversation.Listen;
 import com.aldebaran.qi.sdk.object.conversation.ListenResult;
 import com.aldebaran.qi.sdk.object.conversation.PhraseSet;
@@ -39,6 +41,7 @@ public class FragmentListen extends Fragment {
     private PepperLibActivity pepperLibActivity;
     private View rootLayout;
 
+    private PepperSpeech pepperSpeech;
     private ArrayList<String> listPhrases = new ArrayList<>();
 
     @Nullable
@@ -50,6 +53,7 @@ public class FragmentListen extends Fragment {
         // get widgets
         Spinner spinLanguage = rootLayout.findViewById(R.id.spinLanguage);
         Spinner spinRegion = rootLayout.findViewById(R.id.spinRegion);
+        Spinner spinBodyLanguage = rootLayout.findViewById(R.id.spinListenBodyLanguage);
 
         // convert option enums to string lists
         List<String> languages = new ArrayList<>();
@@ -60,15 +64,26 @@ public class FragmentListen extends Fragment {
         for(Region region : Region.values()){
             regions.add( region.name() );
         }
+        List<String> bodyLanguagOptions = new ArrayList<>();
+        for(BodyLanguageOption bodyLanguageOption : BodyLanguageOption.values()){
+            bodyLanguagOptions.add( bodyLanguageOption.name() );
+        }
 
         // populate spinners
-        SpinnerAdapter spinnerAdapterLanguage = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, languages);
-        SpinnerAdapter spinnerAdapterRegion = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, regions);
+        ArrayAdapter<String> spinnerAdapterLanguage = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, languages);
+        ArrayAdapter<String> spinnerAdapterRegion = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, regions);
+        ArrayAdapter<String> spinnerAdapterBodyLanguageOption = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, bodyLanguagOptions);
         spinLanguage.setAdapter( spinnerAdapterLanguage );
         spinRegion.setAdapter( spinnerAdapterRegion );
+        spinBodyLanguage.setAdapter( spinnerAdapterBodyLanguageOption );
 
         // set defaults
-        // TODO
+        int nLanguage = spinnerAdapterLanguage.getPosition( getPepperSpeech().getListenLanguage().name() );
+        int nRegion = spinnerAdapterRegion.getPosition( getPepperSpeech().getListenRegion().name() );
+        int nBoyLanguageOption = spinnerAdapterBodyLanguageOption.getPosition( getPepperSpeech().getListenBodyLanguage().name() );
+        spinLanguage.setSelection(nLanguage);
+        spinRegion.setSelection(nRegion);
+        spinBodyLanguage.setSelection(nBoyLanguageOption);
 
          // attach listeners
         // adds a phrase to list
@@ -119,6 +134,22 @@ public class FragmentListen extends Fragment {
 
         });
 
+        // set options
+        rootLayout.findViewById(R.id.btnListenOptionsSet).setOnClickListener(v -> {
+            new Thread(() -> {
+                String strLanguage = (String) ((Spinner) rootLayout.findViewById(R.id.spinLanguage)).getSelectedItem();
+                String strRegion = (String) ((Spinner) rootLayout.findViewById(R.id.spinRegion)).getSelectedItem();
+                String strBodyLanguageOption = (String) ((Spinner) rootLayout.findViewById(R.id.spinListenBodyLanguage)).getSelectedItem();
+                getPepperSpeech().setListenLanguage( Language.valueOf(strLanguage) );
+                getPepperSpeech().setListenRegion( Region.valueOf(strRegion) );
+                getPepperSpeech().setListenBodyLanguage( BodyLanguageOption.valueOf(strBodyLanguageOption) );
+                getActivity().runOnUiThread(() -> {
+                    Toast.makeText(getActivity(), R.string.msgListenOptionSet, Toast.LENGTH_LONG).show();
+                });
+                Log.i(TAG, "set listen options " + strLanguage + " : " + strRegion + " : " + strBodyLanguageOption);
+            }).start();
+        });
+
          return rootLayout;
     }
 
@@ -149,19 +180,19 @@ public class FragmentListen extends Fragment {
      * @return         {@link ListenResult}
      */
     private ListenResult listen(List<String> list){
-        PepperSpeech speech = new PepperSpeech(pepperLibActivity.getPepperLib());
+
         List<PhraseSet> phrases = new ArrayList<>();
 
         // extract comma seperated list as list of PhraseSets
         Log.d(TAG, "building list of Phrases from String list.");
         for(String strPhrases : list){
-            PhraseSet phraseSet = speech.createPhraseSet( strPhrases.split(",") );
+            PhraseSet phraseSet = getPepperSpeech().createPhraseSet( strPhrases.split(",") );
             phrases.add(phraseSet);
         }
 
         // create and run listen
         Log.d(TAG, "create and run Listen");
-        Listen listen = speech.listen(phrases);
+        Listen listen = getPepperSpeech().listen(phrases);
         return listen.run();
     }
 
@@ -174,6 +205,18 @@ public class FragmentListen extends Fragment {
             throw new ClassCastException(context.toString() +
                     " must implement PepperLibActivity interface!");
         }
+    }
+
+    /**
+     * Gets the {@link PepperSpeech} object, if not set the function will create one.
+     * @return      {@link PepperSpeech} object.
+     */
+    private PepperSpeech getPepperSpeech(){
+        if(this.pepperSpeech == null && pepperLibActivity != null){
+            this.pepperSpeech = new PepperSpeech(pepperLibActivity.getPepperLib());
+        }
+
+        return this.pepperSpeech;
     }
 
 }
