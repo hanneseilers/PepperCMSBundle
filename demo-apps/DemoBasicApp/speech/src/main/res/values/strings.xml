@@ -1,17 +1,23 @@
 <resources>
     <string name="app_name">DemoSpeechApp</string>
 
+    <string name="btnMenuListen">Listen</string>
+    <string name="btnMenuSay">Say</string>
+
     <string name="btnListenPhraseAdd">Add Phrase</string>
     <string name="btnListenPhraseClear">Clear list</string>
     <string name="txtListenPhraseHint">Phrase(s)</string>
 
     <string name="btnListen">Listen once</string>
 
-    <string name="btnListenOptionsSet">Set Locale Options</string>
+    <string name="btnLanguageOptionsSet">Set Locale Options</string>
 
     <string name="txtListenPhrasesTitle">Phrases to listen to:</string>
     <string name="txtListenHeardWordTitle">Heard word:</string>
-    <string name="txtListenOptionsTitle">Language Options:</string>
+    <string name="txtLanguageOptionsTitle">Language Options:</string>
+
+    <string name="btnSay">Say Sentence</string>
+    <string name="txtSaySentenceHint">Sentence to say</string>
 
     <string name="msgListenOptionSet">Options set</string>
     <string name="msgListenNoPhrasesFound">Set phrases to listen to!</string>
