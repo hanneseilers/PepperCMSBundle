@@ -22,4 +22,7 @@
 
     <string name="msgListenOptionSet">Options set</string>
     <string name="msgListenNoPhrasesFound">Set phrases to listen to!</string>
+
+    <string name="msgSayOptionSet">Options set</string>
+    <string name="msgSayNoSentenceFound">enter sentence / word to say!</string>
 </resources>
