@@ -53,8 +53,8 @@ public class FragmentListen extends Fragment {
 
          // populate spinner locale options
         // get widgets
-        Spinner spinLanguage = rootLayout.findViewById(R.id.spinLanguage);
-        Spinner spinRegion = rootLayout.findViewById(R.id.spinRegion);
+        Spinner spinLanguage = rootLayout.findViewById(R.id.spinListenLanguage);
+        Spinner spinRegion = rootLayout.findViewById(R.id.spinListenRegion);
         Spinner spinBodyLanguage = rootLayout.findViewById(R.id.spinListenBodyLanguage);
 
         // convert option enums to string lists
