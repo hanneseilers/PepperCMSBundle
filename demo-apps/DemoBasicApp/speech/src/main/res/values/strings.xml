@@ -16,7 +16,8 @@
     <string name="txtListenHeardWordTitle">Heard word:</string>
     <string name="txtLanguageOptionsTitle">Language Options:</string>
 
-    <string name="btnSay">Say Sentence</string>
+    <string name="btnSay">Say Sentence / Word</string>
+    <string name="txtSaySentenceTitle">Sentence / Word:</string>
     <string name="txtSaySentenceHint">Sentence to say</string>
 
     <string name="msgListenOptionSet">Options set</string>
