@@ -16,9 +16,13 @@
     <string name="txtListenHeardWordTitle">Heard word:</string>
     <string name="txtLanguageOptionsTitle">Language Options:</string>
 
-    <string name="btnSay">Say Sentence</string>
+    <string name="btnSay">Say Sentence / Word</string>
+    <string name="txtSaySentenceTitle">Sentence / Word:</string>
     <string name="txtSaySentenceHint">Sentence to say</string>
 
     <string name="msgListenOptionSet">Options set</string>
     <string name="msgListenNoPhrasesFound">Set phrases to listen to!</string>
+
+    <string name="msgSayOptionSet">Options set</string>
+    <string name="msgSayNoSentenceFound">enter sentence / word to say!</string>
 </resources>

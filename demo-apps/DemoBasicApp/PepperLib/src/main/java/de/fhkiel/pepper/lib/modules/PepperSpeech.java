@@ -25,19 +25,13 @@ import de.fhkiel.pepper.lib.PepperLib;
 public class PepperSpeech extends PepperLibModule {
 
     // Listen options and their defaults
-    @SuppressWarnings("FieldMayBeFinal")
     private BodyLanguageOption listenBodyLanguage = BodyLanguageOption.NEUTRAL;
-    @SuppressWarnings("FieldMayBeFinal")
     private Language listenLanguage = Language.ENGLISH;
-    @SuppressWarnings("FieldMayBeFinal")
     private Region listenRegion = Region.UNITED_STATES;
 
     // Say options and their defaults
-    @SuppressWarnings("FieldMayBeFinal")
     private BodyLanguageOption sayBodyLanguage = BodyLanguageOption.NEUTRAL;
-    @SuppressWarnings("FieldMayBeFinal")
     private Language sayLanguage = Language.ENGLISH;
-    @SuppressWarnings("FieldMayBeFinal")
     private Region sayRegion = Region.UNITED_STATES;
 
     /**

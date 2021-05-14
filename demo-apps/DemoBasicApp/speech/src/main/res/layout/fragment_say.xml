@@ -9,7 +9,6 @@
         android:layout_height="wrap_content"
         android:baselineAligned="false"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -20,6 +19,14 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/txtSaySentenceTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#CDDC39"
+                android:text="@string/txtSaySentenceTitle"
+                android:textSize="16sp" />
+
             <EditText
                 android:id="@+id/txtSaySentence"
                 android:layout_width="match_parent"
@@ -27,8 +34,11 @@
                 android:autofillHints="text"
                 android:ems="10"
                 android:hint="@string/txtSaySentenceHint"
-                android:inputType="textPersonName"
-                android:labelFor="@id/btnSay" />
+                android:inputType="textMultiLine|textPersonName"
+                android:labelFor="@id/btnSay"
+                android:lineSpacingMultiplier="2"
+                android:lines="5"
+                android:textAlignment="textStart" />
 
             <Button
                 android:id="@+id/btnSay"

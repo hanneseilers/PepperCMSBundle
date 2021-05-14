@@ -10,15 +10,26 @@ import de.fhkiel.pepper.lib.BasicPepperActivity;
 
 public class SpeechActivity extends BasicPepperActivity {
 
-    // Tag for logging
-    private static final String TAG = SpeechActivity.class.getName();
-
+    @SuppressWarnings("CodeBlock2Expr")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         setSpeechBarStrategy(SpeechBarDisplayStrategy.IMMERSIVE, SpeechBarDisplayPosition.TOP);
+
+        findViewById(R.id.btnMenuSay).setOnClickListener(v -> {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainerView, FragmentSay.class, null)
+                    .setReorderingAllowed(true)
+                    .commit();
+        });
+        findViewById(R.id.btnMenuListen).setOnClickListener(v -> {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainerView, FragmentListen.class, null)
+                    .setReorderingAllowed(true)
+                    .commit();
+        });
     }
 
     @Override
