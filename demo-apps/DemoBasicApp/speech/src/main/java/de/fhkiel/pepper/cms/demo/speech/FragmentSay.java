@@ -14,7 +14,6 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.aldebaran.qi.sdk.QiSDK;
 import com.aldebaran.qi.sdk.object.conversation.BodyLanguageOption;
 import com.aldebaran.qi.sdk.object.conversation.Say;
 import com.aldebaran.qi.sdk.object.locale.Language;
@@ -35,6 +34,7 @@ public class FragmentSay extends Fragment {
     private View rootLayout;
     private PepperSpeech pepperSpeech;
 
+    @SuppressWarnings({"ConstantConditions", "CodeBlock2Expr"})
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState){

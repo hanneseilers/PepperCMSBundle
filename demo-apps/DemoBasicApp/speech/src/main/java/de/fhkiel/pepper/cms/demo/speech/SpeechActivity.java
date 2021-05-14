@@ -10,9 +10,7 @@ import de.fhkiel.pepper.lib.BasicPepperActivity;
 
 public class SpeechActivity extends BasicPepperActivity {
 
-    // Tag for logging
-    private static final String TAG = SpeechActivity.class.getName();
-
+    @SuppressWarnings("CodeBlock2Expr")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
