@@ -8,7 +8,7 @@ public interface PepperLibActivity {
 
     /**
      * Sets the robot speechbar options.Should be calle in onCreate()
-     * @param strategy  {@link SpeechBarDisplayStrategy} stategy
+     * @param strategy  {@link SpeechBarDisplayStrategy} strategy
      * @param position  {@link SpeechBarDisplayPosition} position
      */
     void setSpeechBarStrategy(SpeechBarDisplayStrategy strategy, SpeechBarDisplayPosition position);

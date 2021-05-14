@@ -37,7 +37,7 @@ public class PepperLib implements RobotLifecycleCallbacks {
     private final Context context;
 
     // Listener
-    @SuppressWarnings("FieldMayBeFinal")
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private ArrayList<PepperLibCMSCallbackListener> pepperLibCMSCallbackListeners = new ArrayList<>();
 
     public PepperLib(Context context) {
